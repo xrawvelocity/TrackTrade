@@ -1,4 +1,5 @@
 import services from "../services";
+import * as types from "../constants/ActionTypes";
 
 // add connection
 
@@ -6,7 +7,7 @@ export const addConnection = (id) => async (dispatch) => {
   const response = await services.addConnection(id);
 
   dispatch({
-    type: "ADD_CONNECTION",
+    type: types.ADD_CONNECTION,
     payload: response,
   });
 };
@@ -17,7 +18,7 @@ export const removeConnection = (id) => async (dispatch) => {
   const response = await services.removeConnection(id);
 
   dispatch({
-    type: "REMOVE_CONNECTION",
+    type: types.REMOVE_CONNECTION,
     payload: response,
   });
 };

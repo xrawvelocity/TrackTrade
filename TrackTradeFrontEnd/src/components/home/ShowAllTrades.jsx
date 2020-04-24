@@ -114,7 +114,7 @@ class ShowAllTrades extends Component {
                   }}
                   className="trade-ideas-card-link"
                 >
-                  {/* <div onClick={() => this.deleteCard(eachTrade._id)} class="trade-ideas-card-delete">&times;</div> */}
+                  {/* <div onClick={() => this.deleteCard(eachTrade._id)} className="trade-ideas-card-delete">&times;</div> */}
 
                   {eachTrade.trade.money > 0 ? (
                     <div className="trade-ideas-card-win-all">WIN</div>
@@ -200,37 +200,37 @@ class ShowAllTrades extends Component {
             </select>
           </div>
         </div>
-        <div class="trade-ideas">
+        <div className="trade-ideas">
           {this.showTrades()}
           {this.state.eachTrade ? (
-            <div class="popup" id="popup">
-              <div class="popup__content" id="content">
-                <div class="popup__right">
-                  <a href="#main" class="popup__close">
+            <div className="popup" id="popup">
+              <div className="popup__content" id="content">
+                <div className="popup__right">
+                  <a href="#main" className="popup__close">
                     &times;
                   </a>
-                  <h2 class="heading-secondary u-margin-bottom-small">
+                  <h2 className="heading-secondary u-margin-bottom-small">
                     {this.state.eachTrade.trade.currency}{" "}
                     {this.state.eachTrade.trade.kind}
                   </h2>
 
-                  <h2 class="heading-secondary u-margin-bottom-small">
+                  <h2 className="heading-secondary u-margin-bottom-small">
                     Entry: {this.state.eachTrade.trade.entry}
                   </h2>
-                  <h2 class="heading-secondary u-margin-bottom-small">
+                  <h2 className="heading-secondary u-margin-bottom-small">
                     Closed at: {this.state.eachTrade.trade.close}
                   </h2>
 
-                  <h2 class="heading-secondary u-margin-bottom-small">
+                  <h2 className="heading-secondary u-margin-bottom-small">
                     {this.state.eachTrade.trade.description ? (
-                      <p class="popup__text">
+                      <p className="popup__text">
                         {this.state.eachTrade.trade.description}
                       </p>
                     ) : (
-                      <p class="popup__text">No description provided</p>
+                      <p className="popup__text">No description provided</p>
                     )}
                   </h2>
-                  <p class="popup__text">
+                  <p className="popup__text">
                     Created by:
                     <Link to={`/profile/${this.state.eachTrade.trade.trader}`}>
                       {this.state.eachTrade.trade.trader}

@@ -11,7 +11,6 @@ import PostIdea from "./components/profile/PostIdea";
 import PostTrade from "./components/profile/PostTrade";
 import Profile from "./components/profile/Profile";
 import OtherProfile from "./components/profile/OtherProfile";
-import actions from "./services/index";
 import Tools from "./components/tools/Tools";
 
 // redux imports

@@ -1,10 +1,11 @@
 import services from "../services";
+import * as types from "../constants/ActionTypes";
 
 // check log in
 export const checkLogin = () => async (dispatch) => {
   const response = await services.isLoggedIn();
   dispatch({
-    type: "CHECK_LOGIN",
+    type: types.CHECK_LOGIN,
     payload: response,
   });
 };
@@ -13,7 +14,7 @@ export const checkLogin = () => async (dispatch) => {
 export const logIn = (data) => async (dispatch) => {
   const response = await services.logIn(data);
   dispatch({
-    type: "LOG_IN",
+    type: types.LOG_IN,
     payload: response,
   });
 };
@@ -22,7 +23,7 @@ export const logIn = (data) => async (dispatch) => {
 export const signUp = (data) => async (dispatch) => {
   const response = await services.signUp(data);
   dispatch({
-    type: "SIGN_UP",
+    type: types.SIGN_UP,
     payload: response,
   });
 };
@@ -31,7 +32,7 @@ export const signUp = (data) => async (dispatch) => {
 export const logOut = () => async (dispatch) => {
   const response = await services.logOut();
   dispatch({
-    type: "LOG_OUT",
+    type: types.LOG_OUT,
     payload: response,
   });
 };

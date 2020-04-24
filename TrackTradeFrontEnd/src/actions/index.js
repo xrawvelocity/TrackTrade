@@ -1,13 +1,12 @@
 import services from "../services";
-
-// api calls will be made here
+import * as types from "../constants/ActionTypes";
 
 // getTrades
 
 export const fetchAllTrades = () => async (dispatch) => {
   const response = await services.getAllTrades();
   dispatch({
-    type: "FETCH_ALLTRADES",
+    type: types.FETCH_ALLTRADES,
     payload: response,
   });
 };
@@ -15,14 +14,14 @@ export const fetchAllTrades = () => async (dispatch) => {
 export const fetchTrades = () => async (dispatch) => {
   const response = await services.getTrades();
   dispatch({
-    type: "FETCH_TRADES",
+    type: types.FETCH_TRADES,
     payload: response,
   });
 };
 
 export const selectTrade = (trade) => {
   return {
-    type: "TRADE_SELECTED",
+    type: types.TRADE_SELECTED,
     payload: trade,
   };
 };
@@ -32,7 +31,7 @@ export const selectTrade = (trade) => {
 export const fetchAllTradeIdeas = () => async (dispatch) => {
   const response = await services.getAllIdeas();
   dispatch({
-    type: "FETCH_ALLTRADEIDEAS",
+    type: types.FETCH_ALLTRADEIDEAS,
     payload: response,
   });
 };
@@ -40,14 +39,14 @@ export const fetchAllTradeIdeas = () => async (dispatch) => {
 export const fetchTradeIdeas = () => async (dispatch) => {
   const response = await services.getIdeas();
   dispatch({
-    type: "FETCH_TRADEIDEAS",
+    type: types.FETCH_TRADEIDEAS,
     payload: response,
   });
 };
 
 export const selectTradeIdea = (tradeIdea) => {
   return {
-    type: "TRADEIDEA_SELECTED",
+    type: types.TRADEIDEA_SELECTED,
     payload: tradeIdea,
   };
 };
@@ -58,7 +57,7 @@ export const findOtherProfile = (username) => async (dispatch) => {
   const response = await services.findOtherProfile(username);
 
   dispatch({
-    type: "FETCH_USER",
+    type: types.FETCH_USER,
     payload: response.data,
   });
 };
@@ -69,29 +68,29 @@ export const fetchAllTraders = () => async (dispatch) => {
   const response = await services.getAllTraders();
 
   dispatch({
-    type: "FETCH_ALLUSERS",
+    type: types.FETCH_ALLUSERS,
     payload: response,
   });
 };
-
-
 
 // post trade
 export const postTrade = (trade) => async (dispatch) => {
   const response = await services.postTrade(trade);
 
   dispatch({
-    type: "POST_TRADE",
+    type: types.POST_TRADE,
     payload: response,
   });
 };
+
+export const postTradeSuccess = () => {};
 
 // trade idea image
 export const tradeImageUpload = (image) => async (dispatch) => {
   const response = await services.handleTradeUpload(image);
 
   dispatch({
-    type: "TRADE_IMAGE_UPLOAD",
+    type: types.TRADE_IMAGE_UPLOAD,
     payload: response,
   });
 };
@@ -101,7 +100,7 @@ export const postIdea = (trade) => async (dispatch) => {
   const response = await services.postIdea(trade);
 
   dispatch({
-    type: "POST_IDEA",
+    type: types.POST_IDEA,
     payload: response,
   });
 };
@@ -111,7 +110,7 @@ export const deleteIdea = (trade) => async (dispatch) => {
   const response = await services.deleteIdeas(trade);
 
   dispatch({
-    type: "DELETE_IDEA",
+    type: types.DELETE_IDEA,
     payload: response,
   });
 };
@@ -121,7 +120,7 @@ export const ideaImageUpload = (image) => async (dispatch) => {
   const response = await services.handleIdeaUpload(image);
 
   dispatch({
-    type: "IDEA_IMAGE_UPLOAD",
+    type: types.IDEA_IMAGE_UPLOAD,
     payload: response,
   });
 };
@@ -131,7 +130,7 @@ export const updateAvatar = (image) => async (dispatch) => {
   const response = await services.updateAvatar(image);
 
   dispatch({
-    type: "AVATAR_UPLOAD",
+    type: types.AVATAR_UPLOAD,
     payload: response,
   });
 };
