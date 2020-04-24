@@ -5,7 +5,7 @@ import {
   SIGN_UP,
 } from "../constants/ActionTypes";
 
-export default function user(user = null, action) {
+export default (user = null, action) => {
   switch (action.type) {
     case CHECK_LOGIN:
       return (user = action.payload);

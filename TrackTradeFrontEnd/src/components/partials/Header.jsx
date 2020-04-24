@@ -151,7 +151,9 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {logout: state.logOut, user: state.checkLogin}
-}
+  if (state.auth) {
+    return { user: state.auth.data };
+  } else return {  };
+};
 
-export default connect(mapStateToProps, { logOut, checkLogin })(Header)
+export default connect(mapStateToProps, { logOut, checkLogin })(Header);

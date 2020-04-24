@@ -73,7 +73,9 @@ class Signup extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.checkLogin };
+  if(state.auth){
+    return { user: state.auth.data };
+  }
+  else return {}
 };
-
 export default connect(mapStateToProps, { signUp, checkLogin })(Signup);

@@ -310,7 +310,7 @@ class ShowAllTrades extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { allTrades: state.allTrades };
+  return { allTrades: state.trades };
 };
 
 export default connect(mapStateToProps, { fetchAllTrades })(ShowAllTrades);

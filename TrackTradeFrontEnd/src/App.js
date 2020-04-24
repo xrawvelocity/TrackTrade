@@ -28,8 +28,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        {this.props.user &&
-          this.props.user.data ? (
+        {this.props.user ? (
           <Switch>
             <Route
               exact
@@ -152,6 +151,9 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.checkLogin };
+  if(state.auth){
+    return { user: state.auth.data };
+  }
+  else return {}
 };
 export default connect(mapStateToProps, { checkLogin })(App);

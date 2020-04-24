@@ -719,7 +719,7 @@ class ShowIdeas extends Component {
 
 
 const mapStateToProps = state => {
-  return {actualTrades: state.tradeIdeas, selectedTradeIdea: state.selectedTradeIdea, otherProfile: state.otherProfile}
+  return {actualTrades: state.ideas, selectedTradeIdea: state.selectedTradeIdea, otherProfile: state.otherProfile}
 }
 
 export default connect(mapStateToProps, {fetchTradeIdeas, selectTradeIdea, deleteIdea})(ShowIdeas)

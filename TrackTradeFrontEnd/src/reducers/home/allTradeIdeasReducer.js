@@ -1,8 +1,8 @@
-export default (trades = null, action) => {
+export default (ideas = null, action) => {
     switch (action.type){
         case "FETCH_ALLTRADEIDEAS":
-            return (trades = action.payload);
+            return (ideas = action.payload);
         default:
-            return trades
+            return ideas
     }
 }

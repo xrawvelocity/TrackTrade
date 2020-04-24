@@ -32,9 +32,9 @@ class OtherProfile extends Component {
     await this.props.checkLogin();
     if (this.props.otherProfile) {
       if (this.props.match.params.otheruser !== this.props.username) {
-        if (this.props.otherProfile.userdata[0] && this.props.actualUser.data) {
+        if (this.props.otherProfile.userdata[0] && this.props.actualUser) {
           if (
-            this.props.actualUser.data.connections.includes(
+            this.props.actualUser.connections.includes(
               this.props.otherProfile.userdata[0]._id
             )
           ) {
@@ -52,8 +52,8 @@ class OtherProfile extends Component {
     if (this.state.allMessages) {
       let actualMessages = this.props.allMessages.data.filter((eachMessage) => {
         return (
-          eachMessage.sender === this.props.actualUser.data._id ||
-          eachMessage.receiver === this.props.actualUser.data._id
+          eachMessage.sender === this.props.actualUser._id ||
+          eachMessage.receiver === this.props.actualUser._id
         );
       });
       this.setState({ actualMessages });
@@ -129,11 +129,11 @@ class OtherProfile extends Component {
     } catch (err) {
       console.log(err);
     }
-    if (this.props.actualUser.data) {
+    if (this.props.actualUser) {
       let actualMessages = this.props.allMessages.data.filter((eachMessage) => {
         return (
-          eachMessage.sender === this.props.actualUser.data._id ||
-          eachMessage.receiver === this.props.actualUser.data._id
+          eachMessage.sender === this.props.actualUser._id ||
+          eachMessage.receiver === this.props.actualUser._id
         );
       });
       this.setState({ actualMessages });
@@ -162,7 +162,7 @@ class OtherProfile extends Component {
 
                 {this.props.allMessages.data.map((eachMessage) => {
                   if (
-                    eachMessage.sender === this.props.actualUser.data._id &&
+                    eachMessage.sender === this.props.actualUser._id &&
                     eachMessage.receiver ===
                       this.props.otherProfile.userdata[0]._id
                   ) {
@@ -172,7 +172,7 @@ class OtherProfile extends Component {
                       </div>
                     );
                   } else if (
-                    eachMessage.receiver === this.props.actualUser.data._id &&
+                    eachMessage.receiver === this.props.actualUser._id &&
                     eachMessage.sender ===
                       this.props.otherProfile.userdata[0]._id
                   ) {
@@ -215,7 +215,7 @@ class OtherProfile extends Component {
     if (this.props.actualUser) {
       if (
         this.props.match.params.otheruser !==
-        this.props.actualUser.data.username
+        this.props.actualUser.username
       ) {
         return this.props.otherProfile ? (
           <div>
@@ -323,12 +323,14 @@ class OtherProfile extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("state", state);
-  return {
-    otherProfile: state.otherProfile,
-    allMessages: state.allMessages,
-    actualUser: state.checkLogin,
-  };
+  if (state.auth) {
+    return {
+      otherProfile: state.otherProfile,
+      allMessages: state.allMessages,
+      actualUser: state.auth.data,
+    };
+  } else
+    return { otherProfile: state.otherProfile, allMessages: state.allMessages };
 };
 
 export default connect(mapStateToProps, {

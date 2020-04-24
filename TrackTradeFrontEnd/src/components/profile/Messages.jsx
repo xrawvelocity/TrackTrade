@@ -14,13 +14,13 @@ const Messages = (props) => {
   useEffect(() => {
     if (!props.allMessages) {
       fetchData();
-      console.log('++++++')
+      console.log("++++++");
     } else {
-      console.log("-------")
+      console.log("-------");
       let actualMessages = props.allMessages.data.filter((eachMessage) => {
         return (
-          eachMessage.sender === props.user.data._id ||
-          eachMessage.receiver === props.user.data._id
+          eachMessage.sender === props.user._id ||
+          eachMessage.receiver === props.user._id
         );
       });
       console.log("test", actualMessages);
@@ -61,14 +61,14 @@ const Messages = (props) => {
       console.log(err);
     }
 
-    setMessage("")
+    setMessage("");
   };
 
   const selectTheProfile = () => {
-    if (props.allTraders && props.user.data) {
+    if (props.allTraders && props.user) {
       let copyTraders = [...props.allTraders.data];
       let filteredTraders = copyTraders.filter((eachTrader) => {
-        return props.user.data.connections.includes(eachTrader._id);
+        return props.user.connections.includes(eachTrader._id);
         //loop through props.user to get connections and
         //only return those that match you know
       });
@@ -163,7 +163,7 @@ const Messages = (props) => {
 
                 {messages.map((eachMessage) => {
                   if (
-                    eachMessage.sender === props.user.data._id &&
+                    eachMessage.sender === props.user._id &&
                     eachMessage.receiver === selectedProfile._id
                   ) {
                     return (
@@ -172,7 +172,7 @@ const Messages = (props) => {
                       </div>
                     );
                   } else if (
-                    eachMessage.receiver === props.user.data._id &&
+                    eachMessage.receiver === props.user._id &&
                     eachMessage.sender === selectedProfile._id
                   ) {
                     return (
@@ -221,12 +221,19 @@ const Messages = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return {
-    allTraders: state.allTraders,
-    allMessages: state.allMessages,
-    user: state.checkLogin,
-    sendMessage: state.sendMessage,
-  };
+  if (state.auth) {
+    return {
+      allTraders: state.allTraders,
+      allMessages: state.allMessages,
+      user: state.auth.data,
+      sendMessage: state.sendMessage,
+    };
+  } else
+    return {
+      allTraders: state.allTraders,
+      allMessages: state.allMessages,
+      sendMessage: state.sendMessage,
+    };
 };
 
 export default connect(mapStateToProps, {

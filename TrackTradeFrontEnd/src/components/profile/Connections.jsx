@@ -7,12 +7,11 @@ import { fetchAllTrades, fetchAllTraders } from "../../actions";
 import { checkLogin } from "../../actions/auth";
 
 const Connections = (props) => {
-
   useEffect(() => {
     if (!props.allTraders) {
       fetchData();
     } else {
-      console.log('hurray!')
+      console.log("hurray!");
     }
   });
 
@@ -64,10 +63,10 @@ const Connections = (props) => {
   };
 
   const showConnections = () => {
-    if (props.allTraders && props.user.data) {
+    if (props.allTraders && props.user) {
       let copyTraders = [...props.allTraders.data];
       let filteredTraders = copyTraders.filter((eachTrader) => {
-        return props.user.data.connections.includes(eachTrader._id);
+        return props.user.connections.includes(eachTrader._id);
         //loop through props.user to get connections and
         //only return those that match you know
       });
@@ -146,13 +145,17 @@ const Connections = (props) => {
     </Fragment>
   );
 };
+
 const mapStateToProps = (state) => {
-  return {
-    allTraders: state.allTraders,
-    actualTrades: state.allTrades,
-    user: state.checkLogin,
-  };
+  if (state.auth) {
+    return {
+      allTraders: state.allTraders,
+      actualTrades: state.allTrades,
+      user: state.auth.data,
+    };
+  } else return { allTraders: state.allTraders, actualTrades: state.allTrades };
 };
+
 export default connect(mapStateToProps, {
   fetchAllTrades,
   fetchAllTraders,

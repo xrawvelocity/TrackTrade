@@ -55,10 +55,10 @@ class Profile extends Component {
   };
 
   imageLoad = () => {
-    return this.props.user.data.avatar ? (
+    return this.props.user.avatar ? (
       <img
         className="profile-nav__user-avatar__image"
-        src={this.props.user.data.avatar}
+        src={this.props.user.avatar}
         alt="Avatar"
       />
     ) : (
@@ -98,7 +98,7 @@ class Profile extends Component {
                 </div>
               </div>
               <h1 className="profile-nav__user-username">
-                {this.props.user.data.username}
+                {this.props.user.username}
               </h1>
             </div>
             <ul className="profile-nav__links">
@@ -190,7 +190,9 @@ class Profile extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.checkLogin, avatar: state.updateAvatar };
+  if (state.auth) {
+    return { user: state.auth.data, avatar: state.updateAvatar };
+  } else return { avatar: state.updateAvatar };
 };
 
 export default connect(mapStateToProps, { checkLogin, updateAvatar })(Profile);
