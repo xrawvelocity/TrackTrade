@@ -49,7 +49,7 @@ class ShowAllIdeas extends Component {
   sortTradeIdeas = (e) => {
     console.log(e.target.value);
     if (e.target.value === "") {
-      this.setState({ tradeIdeas: this.props.actualTrades .data});
+      this.setState({ tradeIdeas: this.props.actualTrades.data});
     } else if (e.target.value === "sell") {
       let tradeIdeasList = [...this.props.actualTrades.data];
       let filteredTradeIdeas = tradeIdeasList.filter((eachTradeIdea) => {
@@ -336,7 +336,8 @@ class ShowAllIdeas extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { actualTrades: state.ideas }
+  console.log("state", state)
+    return { actualTrades: state.ideas.ideas }
 }
 
 export default connect(mapStateToProps, {fetchAllTradeIdeas})(ShowAllIdeas)

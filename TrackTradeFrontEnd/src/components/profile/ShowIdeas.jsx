@@ -13,7 +13,7 @@ import {
 
 //redux imports
 import { connect } from "react-redux";
-import { fetchTradeIdeas, selectTradeIdea, deleteIdea } from "../../actions";
+import { fetchTradeIdeas, deleteIdea } from "../../actions";
 
 class ShowIdeas extends Component {
   state = {};
@@ -36,14 +36,14 @@ class ShowIdeas extends Component {
   };
 
   showIdeas = () => {
-    if (this.props.actualTrades) {
+    if (this.props.actualTrades.data) {
       return this.props.actualTrades.data.map((eachTrade, index) => {
         return (
           <div key={index} className="trade-ideas-card">
             <a
               href="#popup"
               onClick={async () => {
-                await this.props.selectTradeIdea({ eachTrade });
+                await this.setState({ eachTrade });
               }}
               className="trade-ideas-card-more"
             >
@@ -53,7 +53,7 @@ class ShowIdeas extends Component {
               href="#popup"
               className="trade-ideas-card-link"
               onClick={async () => {
-                await this.props.selectTradeIdea({ eachTrade });
+                await this.setState({ eachTrade });
               }}
             >
               <div className="trade-ideas-card__item">
@@ -132,7 +132,7 @@ class ShowIdeas extends Component {
             <a
               href="#popup"
               onClick={async () => {
-                await this.props.selectTradeIdea({ eachTrade });
+                await this.setState({ eachTrade });
               }}
               className="trade-ideas-card-more"
             >
@@ -142,7 +142,7 @@ class ShowIdeas extends Component {
               href="#popup"
               className="trade-ideas-card-link"
               onClick={async () => {
-                await this.props.selectTradeIdea({ eachTrade });
+                await this.setState({ eachTrade });
               }}
             >
               <div className="trade-ideas-card__item">
@@ -155,7 +155,7 @@ class ShowIdeas extends Component {
                                 Lot Size:
                             </div>
                             <div className="trade-ideas-card__item-content">
-                                {this.props.selectedTradeIdea.eachTrade.trade.lot}
+                                {this.state.eachTrade.trade.lot}
                             </div>
                         </div> */}
               <div className="trade-ideas-card__item">
@@ -228,7 +228,7 @@ class ShowIdeas extends Component {
   //     console.log("result: ", result);
   //     console.log("state: ", this.props.editselectedTradeIdea.EachTrade);
   //     this.props.editselectedTradeIdea.EachTrade.imageUrl = result.secure_url;
-  //     this.props.editselectedTradeIdea.EachTrade.tradeID = this.props.selectedTradeIdea.eachTrade._id;
+  //     this.props.editselectedTradeIdea.EachTrade.tradeID = this.state.eachTrade._id;
   //     console.log("after: ", this.props.editselectedTradeIdea.EachTrade);
   //     this.setState({editselectedTradeIdea.EachTrade: this.props.editselectedTradeIdea.EachTrade})
   //     console.log("test: ", this.props.editselectedTradeIdea.EachTrade);
@@ -239,7 +239,7 @@ class ShowIdeas extends Component {
 
   // handleChange = e => {
   //   let editCopy = this.props.editselectedTradeIdea.EachTrade;
-  //   editCopy["tradeID"] = this.props.selectedTradeIdea.eachTrade._id;
+  //   editCopy["tradeID"] = this.state.eachTrade._id;
   //   editCopy[e.target.name] = e.target.value;
   //   console.log(editCopy);
   //   this.setState({ editselectedTradeIdea.EachTrade: editCopy });
@@ -267,14 +267,13 @@ class ShowIdeas extends Component {
       return (
         <div className="trade-ideas">
           {this.showIdeas()}
-          {this.props.selectedTradeIdea &&
-            this.props.selectedTradeIdea.eachTrade ? (
+          {this.state.eachTrade ? (
             <div className="popup" id="popup">
               <div className="popup__content" id="content">
                 <div className="popup__left">
                   <img
                     className="popup__left--image"
-                    src={this.props.selectedTradeIdea.eachTrade.trade.imageUrl}
+                    src={this.state.eachTrade.trade.imageUrl}
                     alt="trade"
                   />
                 </div>
@@ -288,49 +287,49 @@ class ShowIdeas extends Component {
                     </button>
                     <a
                       href="#main"
-                      onClick={() => this.deleteCard(this.props.selectedTradeIdea.eachTrade._id)}
+                      onClick={() => this.deleteCard(this.state.eachTrade._id)}
                       className="popup__delete"
                     >
                       DELETE IDEA
                     </a>
 
                     <h2 className="heading-secondary u-margin-bottom-small">
-                      {this.props.selectedTradeIdea.eachTrade.trade.currency}{" "}
-                      {this.props.selectedTradeIdea.eachTrade.trade.kind}
+                      {this.state.eachTrade.trade.currency}{" "}
+                      {this.state.eachTrade.trade.kind}
                     </h2>
 
                     <h2 className="heading-secondary u-margin-bottom-small">
-                      Entry: {this.props.selectedTradeIdea.eachTrade.trade.entry}
+                      Entry: {this.state.eachTrade.trade.entry}
                     </h2>
                     <h2 className="heading-secondary u-margin-bottom-small">
-                      Stoploss: {this.props.selectedTradeIdea.eachTrade.trade.stoploss}
+                      Stoploss: {this.state.eachTrade.trade.stoploss}
                     </h2>
                     <h2 className="heading-secondary u-margin-bottom-small">
-                      Takeprofit: {this.props.selectedTradeIdea.eachTrade.trade.takeprofit}
+                      Takeprofit: {this.state.eachTrade.trade.takeprofit}
                     </h2>
 
                     <h2 className="heading-secondary u-margin-bottom-small">
-                      {this.props.selectedTradeIdea.eachTrade.trade.description ? (
+                      {this.state.eachTrade.trade.description ? (
                         <p className="popup__text">
-                          {this.props.selectedTradeIdea.eachTrade.trade.description}
+                          {this.state.eachTrade.trade.description}
                         </p>
                       ) : null}
                     </h2>
 
                     <div className="popup_right-sharing-icons">
                       <FacebookShareButton
-                        url={`https://www.tracktrade.co/profile/${this.props.selectedTradeIdea.eachTrade.trade.trader}`}
+                        url={`https://www.tracktrade.co/profile/${this.state.eachTrade.trade.trader}`}
                         title={`MY TRADE IDEA:\n${
-                          this.props.selectedTradeIdea.eachTrade.trade.currency
-                        } ${this.props.selectedTradeIdea.eachTrade.trade.kind}\nEntry: ${
-                          this.props.selectedTradeIdea.eachTrade.trade.entry
+                          this.state.eachTrade.trade.currency
+                        } ${this.state.eachTrade.trade.kind}\nEntry: ${
+                          this.state.eachTrade.trade.entry
                         }\nStoploss: ${
-                          this.props.selectedTradeIdea.eachTrade.trade.stoploss
+                          this.state.eachTrade.trade.stoploss
                         }\nTakeprofit: ${
-                          this.props.selectedTradeIdea.eachTrade.trade.takeprofit
+                          this.state.eachTrade.trade.takeprofit
                         }\n${
-                          this.props.selectedTradeIdea.eachTrade.trade.description
-                            ? `Description: ${this.props.selectedTradeIdea.eachTrade.trade.description}\n`
+                          this.state.eachTrade.trade.description
+                            ? `Description: ${this.state.eachTrade.trade.description}\n`
                             : ""
                         }`}
                         className="popup_right-sharing-icons-button"
@@ -338,18 +337,18 @@ class ShowIdeas extends Component {
                         <FacebookIcon size={32} round />
                       </FacebookShareButton>
                       <TwitterShareButton
-                        url={`https://www.tracktrade.co/profile/${this.props.selectedTradeIdea.eachTrade.trade.trader}`}
+                        url={`https://www.tracktrade.co/profile/${this.state.eachTrade.trade.trader}`}
                         title={`MY TRADE IDEA:\n${
-                          this.props.selectedTradeIdea.eachTrade.trade.currency
-                        } ${this.props.selectedTradeIdea.eachTrade.trade.kind}\nEntry: ${
-                          this.props.selectedTradeIdea.eachTrade.trade.entry
+                          this.state.eachTrade.trade.currency
+                        } ${this.state.eachTrade.trade.kind}\nEntry: ${
+                          this.state.eachTrade.trade.entry
                         }\nStoploss: ${
-                          this.props.selectedTradeIdea.eachTrade.trade.stoploss
+                          this.state.eachTrade.trade.stoploss
                         }\nTakeprofit: ${
-                          this.props.selectedTradeIdea.eachTrade.trade.takeprofit
+                          this.state.eachTrade.trade.takeprofit
                         }\n${
-                          this.props.selectedTradeIdea.eachTrade.trade.description
-                            ? `Description: ${this.props.selectedTradeIdea.eachTrade.trade.description}\n`
+                          this.state.eachTrade.trade.description
+                            ? `Description: ${this.state.eachTrade.trade.description}\n`
                             : ""
                         }`}
                         className="popup_right-sharing-icons-button"
@@ -357,18 +356,18 @@ class ShowIdeas extends Component {
                         <TwitterIcon size={32} round />
                       </TwitterShareButton>
                       <TelegramShareButton
-                        url={`https://www.tracktrade.co/profile/${this.props.selectedTradeIdea.eachTrade.trade.trader}`}
+                        url={`https://www.tracktrade.co/profile/${this.state.eachTrade.trade.trader}`}
                         title={`MY TRADE IDEA:\n${
-                          this.props.selectedTradeIdea.eachTrade.trade.currency
-                        } ${this.props.selectedTradeIdea.eachTrade.trade.kind}\nEntry: ${
-                          this.props.selectedTradeIdea.eachTrade.trade.entry
+                          this.state.eachTrade.trade.currency
+                        } ${this.state.eachTrade.trade.kind}\nEntry: ${
+                          this.state.eachTrade.trade.entry
                         }\nStoploss: ${
-                          this.props.selectedTradeIdea.eachTrade.trade.stoploss
+                          this.state.eachTrade.trade.stoploss
                         }\nTakeprofit: ${
-                          this.props.selectedTradeIdea.eachTrade.trade.takeprofit
+                          this.state.eachTrade.trade.takeprofit
                         }\n${
-                          this.props.selectedTradeIdea.eachTrade.trade.description
-                            ? `Description: ${this.props.selectedTradeIdea.eachTrade.trade.description}\n`
+                          this.state.eachTrade.trade.description
+                            ? `Description: ${this.state.eachTrade.trade.description}\n`
                             : ""
                         }`}
                         className="popup_right-sharing-icons-button"
@@ -376,18 +375,18 @@ class ShowIdeas extends Component {
                         <TelegramIcon size={32} round />
                       </TelegramShareButton>
                       <WhatsappShareButton
-                        url={`https://www.tracktrade.co/profile/${this.props.selectedTradeIdea.eachTrade.trade.trader}`}
+                        url={`https://www.tracktrade.co/profile/${this.state.eachTrade.trade.trader}`}
                         title={`MY TRADE IDEA:\n${
-                          this.props.selectedTradeIdea.eachTrade.trade.currency
-                        } ${this.props.selectedTradeIdea.eachTrade.trade.kind}\nEntry: ${
-                          this.props.selectedTradeIdea.eachTrade.trade.entry
+                          this.state.eachTrade.trade.currency
+                        } ${this.state.eachTrade.trade.kind}\nEntry: ${
+                          this.state.eachTrade.trade.entry
                         }\nStoploss: ${
-                          this.props.selectedTradeIdea.eachTrade.trade.stoploss
+                          this.state.eachTrade.trade.stoploss
                         }\nTakeprofit: ${
-                          this.props.selectedTradeIdea.eachTrade.trade.takeprofit
+                          this.state.eachTrade.trade.takeprofit
                         }\n${
-                          this.props.selectedTradeIdea.eachTrade.trade.description
-                            ? `Description: ${this.props.selectedTradeIdea.eachTrade.trade.description}\n`
+                          this.state.eachTrade.trade.description
+                            ? `Description: ${this.state.eachTrade.trade.description}\n`
                             : ""
                         }`}
                         className="popup_right-sharing-icons-button"
@@ -420,7 +419,7 @@ class ShowIdeas extends Component {
                         <div className="popup-form-group">
                           <label for="currency">Currency</label>
                           <select
-                            placeholder={this.props.selectedTradeIdea.eachTrade.trade.currency}
+                            placeholder={this.state.eachTrade.trade.currency}
                             className="popup-form-input"
                             required
                             onChange={this.handleChange}
@@ -459,7 +458,7 @@ class ShowIdeas extends Component {
                         <div className="popup-form-group">
                           <label for="type">Sell or Buy</label>
                           <select
-                            placeholder={this.props.selectedTradeIdea.eachTrade.trade.kind}
+                            placeholder={this.state.eachTrade.trade.kind}
                             className="popup-form-input"
                             onChange={this.handleChange}
                             name="kind"
@@ -473,7 +472,7 @@ class ShowIdeas extends Component {
                         <div className="popup-form-group">
                           <label for="lot">Lot size</label>
                           <input
-                            placeholder={this.props.selectedTradeIdea.eachTrade.trade.lot}
+                            placeholder={this.state.eachTrade.trade.lot}
                             onChange={this.handleChange}
                             type="number"
                             className="popup-form-input"
@@ -488,7 +487,7 @@ class ShowIdeas extends Component {
                         <div className="popup-form-group">
                           <label for="lot">Description</label>
                           <textarea
-                            placeholder={this.props.selectedTradeIdea.eachTrade.trade.description}
+                            placeholder={this.state.eachTrade.trade.description}
                             onChange={this.handleChange}
                             type="text"
                             className="popup-form-input"
@@ -501,7 +500,7 @@ class ShowIdeas extends Component {
                         <div className="popup-form-group">
                           <label for="entry">Entry price</label>
                           <input
-                            placeholder={this.props.selectedTradeIdea.eachTrade.trade.entry}
+                            placeholder={this.state.eachTrade.trade.entry}
                             onChange={this.handleChange}
                             type="number"
                             className="popup-form-input"
@@ -515,7 +514,7 @@ class ShowIdeas extends Component {
                         <div className="popup-form-group">
                           <label for="close">Stop Loss</label>
                           <input
-                            placeholder={this.props.selectedTradeIdea.eachTrade.trade.stoploss}
+                            placeholder={this.state.eachTrade.trade.stoploss}
                             onChange={this.handleChange}
                             type="number"
                             className="popup-form-input"
@@ -529,7 +528,7 @@ class ShowIdeas extends Component {
                         <div className="popup-form-group">
                           <label for="close">Take Profit</label>
                           <input
-                            placeholder={this.props.selectedTradeIdea.eachTrade.trade.takeprofit}
+                            placeholder={this.state.eachTrade.trade.takeprofit}
                             onChange={this.handleChange}
                             type="number"
                             className="popup-form-input"
@@ -582,38 +581,38 @@ class ShowIdeas extends Component {
           {/* {this.exitPopup()} */}
 
           {this.props.selectedTradeIdea &&
-            this.props.selectedTradeIdea.eachTrade ? (
+            this.state.eachTrade ? (
             <div className="popup" id="popup">
               <div className="popup__content" id="content">
                 <div className="popup__left">
-                  <img src={this.props.selectedTradeIdea.eachTrade.imageUrl} alt="trade" />
+                  <img src={this.state.eachTrade.imageUrl} alt="trade" />
                 </div>
                 <div className="popup__right">
                   <a href="#main" className="popup__close">
                     &times;
                   </a>
                   {/* <button onClick={this.editIdeas} className="popup__edit">EDIT IDEA</button>
-                                <a href="#main" onClick={() => this.deleteCard(this.props.selectedTradeIdea.eachTrade._id)} className="popup__delete">DELETE IDEA</a>
+                                <a href="#main" onClick={() => this.deleteCard(this.state.eachTrade._id)} className="popup__delete">DELETE IDEA</a>
                                  */}
                   <h2 className="heading-secondary u-margin-bottom-small">
-                    {this.props.selectedTradeIdea.eachTrade.trade.currency}{" "}
-                    {this.props.selectedTradeIdea.eachTrade.trade.kind}
+                    {this.state.eachTrade.trade.currency}{" "}
+                    {this.state.eachTrade.trade.kind}
                   </h2>
 
                   <h2 className="heading-secondary u-margin-bottom-small">
-                    Entry: {this.props.selectedTradeIdea.eachTrade.trade.entry}
+                    Entry: {this.state.eachTrade.trade.entry}
                   </h2>
                   <h2 className="heading-secondary u-margin-bottom-small">
-                    Stoploss: {this.props.selectedTradeIdea.eachTrade.trade.stoploss}
+                    Stoploss: {this.state.eachTrade.trade.stoploss}
                   </h2>
                   <h2 className="heading-secondary u-margin-bottom-small">
-                    Takeprofit: {this.props.selectedTradeIdea.eachTrade.trade.takeprofit}
+                    Takeprofit: {this.state.eachTrade.trade.takeprofit}
                   </h2>
 
                   <h2 class="heading-secondary u-margin-bottom-small">
-                    {this.props.selectedTradeIdea.eachTrade.trade.description ? (
+                    {this.state.eachTrade.trade.description ? (
                       <p class="popup__text">
-                        Description: {this.props.selectedTradeIdea.eachTrade.trade.description}
+                        Description: {this.state.eachTrade.trade.description}
                       </p>
                     ) : (
                       <p class="popup__text">No description provided</p>
@@ -622,20 +621,20 @@ class ShowIdeas extends Component {
 
                   <div className="popup_right-sharing-icons">
                     <FacebookShareButton
-                      url={`https://www.tracktrade.co/profile/${this.props.selectedTradeIdea.eachTrade.trade.trader}`}
+                      url={`https://www.tracktrade.co/profile/${this.state.eachTrade.trade.trader}`}
                       title={`${
-                        this.props.selectedTradeIdea.eachTrade.trade.trader
-                      }'s TRADE IDEA:\n${this.props.selectedTradeIdea.eachTrade.trade.currency} ${
-                        this.props.selectedTradeIdea.eachTrade.trade.kind
+                        this.state.eachTrade.trade.trader
+                      }'s TRADE IDEA:\n${this.state.eachTrade.trade.currency} ${
+                        this.state.eachTrade.trade.kind
                       }\nEntry: ${
-                        this.props.selectedTradeIdea.eachTrade.trade.entry
+                        this.state.eachTrade.trade.entry
                       }\nStoploss: ${
-                        this.props.selectedTradeIdea.eachTrade.trade.stoploss
+                        this.state.eachTrade.trade.stoploss
                       }\nTakeprofit: ${
-                        this.props.selectedTradeIdea.eachTrade.trade.takeprofit
+                        this.state.eachTrade.trade.takeprofit
                       }\n${
-                        this.props.selectedTradeIdea.eachTrade.trade.description
-                          ? `Description: ${this.props.selectedTradeIdea.eachTrade.trade.description}\n`
+                        this.state.eachTrade.trade.description
+                          ? `Description: ${this.state.eachTrade.trade.description}\n`
                           : ""
                       }`}
                       className="popup_right-sharing-icons-button"
@@ -643,20 +642,20 @@ class ShowIdeas extends Component {
                       <FacebookIcon size={32} round />
                     </FacebookShareButton>
                     <TwitterShareButton
-                      url={`https://www.tracktrade.co/profile/${this.props.selectedTradeIdea.eachTrade.trade.trader}`}
+                      url={`https://www.tracktrade.co/profile/${this.state.eachTrade.trade.trader}`}
                       title={`${
-                        this.props.selectedTradeIdea.eachTrade.trade.trader
-                      }'s TRADE IDEA:\n${this.props.selectedTradeIdea.eachTrade.trade.currency} ${
-                        this.props.selectedTradeIdea.eachTrade.trade.kind
+                        this.state.eachTrade.trade.trader
+                      }'s TRADE IDEA:\n${this.state.eachTrade.trade.currency} ${
+                        this.state.eachTrade.trade.kind
                       }\nEntry: ${
-                        this.props.selectedTradeIdea.eachTrade.trade.entry
+                        this.state.eachTrade.trade.entry
                       }\nStoploss: ${
-                        this.props.selectedTradeIdea.eachTrade.trade.stoploss
+                        this.state.eachTrade.trade.stoploss
                       }\nTakeprofit: ${
-                        this.props.selectedTradeIdea.eachTrade.trade.takeprofit
+                        this.state.eachTrade.trade.takeprofit
                       }\n${
-                        this.props.selectedTradeIdea.eachTrade.trade.description
-                          ? `Description: ${this.props.selectedTradeIdea.eachTrade.trade.description}\n`
+                        this.state.eachTrade.trade.description
+                          ? `Description: ${this.state.eachTrade.trade.description}\n`
                           : ""
                       }`}
                       className="popup_right-sharing-icons-button"
@@ -664,20 +663,20 @@ class ShowIdeas extends Component {
                       <TwitterIcon size={32} round />
                     </TwitterShareButton>
                     <TelegramShareButton
-                      url={`https://www.tracktrade.co/profile/${this.props.selectedTradeIdea.eachTrade.trade.trader}`}
+                      url={`https://www.tracktrade.co/profile/${this.state.eachTrade.trade.trader}`}
                       title={`${
-                        this.props.selectedTradeIdea.eachTrade.trade.trader
-                      }'s TRADE IDEA:\n${this.props.selectedTradeIdea.eachTrade.trade.currency} ${
-                        this.props.selectedTradeIdea.eachTrade.trade.kind
+                        this.state.eachTrade.trade.trader
+                      }'s TRADE IDEA:\n${this.state.eachTrade.trade.currency} ${
+                        this.state.eachTrade.trade.kind
                       }\nEntry: ${
-                        this.props.selectedTradeIdea.eachTrade.trade.entry
+                        this.state.eachTrade.trade.entry
                       }\nStoploss: ${
-                        this.props.selectedTradeIdea.eachTrade.trade.stoploss
+                        this.state.eachTrade.trade.stoploss
                       }\nTakeprofit: ${
-                        this.props.selectedTradeIdea.eachTrade.trade.takeprofit
+                        this.state.eachTrade.trade.takeprofit
                       }\n${
-                        this.props.selectedTradeIdea.eachTrade.trade.description
-                          ? `Description: ${this.props.selectedTradeIdea.eachTrade.trade.description}\n`
+                        this.state.eachTrade.trade.description
+                          ? `Description: ${this.state.eachTrade.trade.description}\n`
                           : ""
                       }`}
                       className="popup_right-sharing-icons-button"
@@ -685,20 +684,20 @@ class ShowIdeas extends Component {
                       <TelegramIcon size={32} round />
                     </TelegramShareButton>
                     <WhatsappShareButton
-                      url={`https://www.tracktrade.co/profile/${this.props.selectedTradeIdea.eachTrade.trade.trader}`}
+                      url={`https://www.tracktrade.co/profile/${this.state.eachTrade.trade.trader}`}
                       title={`${
-                        this.props.selectedTradeIdea.eachTrade.trade.trader
-                      }'s TRADE IDEA:\n${this.props.selectedTradeIdea.eachTrade.trade.currency} ${
-                        this.props.selectedTradeIdea.eachTrade.trade.kind
+                        this.state.eachTrade.trade.trader
+                      }'s TRADE IDEA:\n${this.state.eachTrade.trade.currency} ${
+                        this.state.eachTrade.trade.kind
                       }\nEntry: ${
-                        this.props.selectedTradeIdea.eachTrade.trade.entry
+                        this.state.eachTrade.trade.entry
                       }\nStoploss: ${
-                        this.props.selectedTradeIdea.eachTrade.trade.stoploss
+                        this.state.eachTrade.trade.stoploss
                       }\nTakeprofit: ${
-                        this.props.selectedTradeIdea.eachTrade.trade.takeprofit
+                        this.state.eachTrade.trade.takeprofit
                       }\n${
-                        this.props.selectedTradeIdea.eachTrade.trade.description
-                          ? `Description: ${this.props.selectedTradeIdea.eachTrade.trade.description}\n`
+                        this.state.eachTrade.trade.description
+                          ? `Description: ${this.state.eachTrade.trade.description}\n`
                           : ""
                       }`}
                       className="popup_right-sharing-icons-button"
@@ -719,7 +718,8 @@ class ShowIdeas extends Component {
 
 
 const mapStateToProps = state => {
-  return {actualTrades: state.ideas, selectedTradeIdea: state.selectedTradeIdea, otherProfile: state.otherProfile}
+  console.log('state',state)
+  return {actualTrades: state.ideas.moreideas, selectedTradeIdea: state.selectedTradeIdea, otherProfile: state.otherProfile}
 }
 
-export default connect(mapStateToProps, {fetchTradeIdeas, selectTradeIdea, deleteIdea})(ShowIdeas)
+export default connect(mapStateToProps, {fetchTradeIdeas, deleteIdea})(ShowIdeas)

@@ -562,7 +562,7 @@ class ShowStats extends Component {
 
 const mapStateToProps = (state) => {
   console.log("state", state);
-  return { actualTrades: state.trades, allTrades: state.allTrades };
+  return { actualTrades: state.trades.moretrades, allTrades: state.allTrades };
 };
 
 export default connect(mapStateToProps, { fetchTrades, fetchAllTrades })(

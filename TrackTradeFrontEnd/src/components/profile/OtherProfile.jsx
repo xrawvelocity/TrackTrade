@@ -64,7 +64,7 @@ class OtherProfile extends Component {
     if (this.state.display) {
       if (this.state.display === "ideas") {
         return (
-          <ShowIdeas tradeIdeas={this.state.tradeIdeas} otherProfile={true} />
+          <ShowIdeas otherProfile={true} />
         );
       } else if (this.state.display === "trades") {
         return <ShowTrades trades={this.state.trades} otherProfile={true} />;
@@ -324,13 +324,14 @@ class OtherProfile extends Component {
 
 const mapStateToProps = (state) => {
   if (state.auth) {
+    console.log("state", state)
     return {
       otherProfile: state.otherProfile,
-      allMessages: state.allMessages,
+      allMessages: state.messages,
       actualUser: state.auth.data,
     };
   } else
-    return { otherProfile: state.otherProfile, allMessages: state.allMessages };
+    return { otherProfile: state.profiles, allMessages: state.messages };
 };
 
 export default connect(mapStateToProps, {

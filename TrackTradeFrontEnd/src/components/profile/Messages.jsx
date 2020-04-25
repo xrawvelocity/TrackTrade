@@ -36,8 +36,6 @@ const Messages = (props) => {
 
     await props.checkLogin();
     console.log("props----", props);
-
-    console.log("props", props);
   };
 
   const formatTime = (time) => String(new Date(time)).substring(0, 24);
@@ -223,16 +221,16 @@ const Messages = (props) => {
 const mapStateToProps = (state) => {
   if (state.auth) {
     return {
-      allTraders: state.allTraders,
-      allMessages: state.allMessages,
+      allTraders: state.allProfiles,
+      allMessages: state.messages,
       user: state.auth.data,
-      sendMessage: state.sendMessage,
+      sendMessage: state.messages,
     };
   } else
     return {
-      allTraders: state.allTraders,
-      allMessages: state.allMessages,
-      sendMessage: state.sendMessage,
+      allTraders: state.allProfiles,
+      allMessages: state.messages,
+      sendMessage: state.messages,
     };
 };
 

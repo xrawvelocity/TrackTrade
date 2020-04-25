@@ -19,13 +19,6 @@ export const fetchTrades = () => async (dispatch) => {
   });
 };
 
-export const selectTrade = (trade) => {
-  return {
-    type: types.TRADE_SELECTED,
-    payload: trade,
-  };
-};
-
 // getTradeIdeas
 
 export const fetchAllTradeIdeas = () => async (dispatch) => {
@@ -42,13 +35,6 @@ export const fetchTradeIdeas = () => async (dispatch) => {
     type: types.FETCH_TRADEIDEAS,
     payload: response,
   });
-};
-
-export const selectTradeIdea = (tradeIdea) => {
-  return {
-    type: types.TRADEIDEA_SELECTED,
-    payload: tradeIdea,
-  };
 };
 
 // find other profile

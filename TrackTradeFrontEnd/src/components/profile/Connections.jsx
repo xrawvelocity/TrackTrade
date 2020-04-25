@@ -148,12 +148,13 @@ const Connections = (props) => {
 
 const mapStateToProps = (state) => {
   if (state.auth) {
+    console.log("state",state)
     return {
-      allTraders: state.allTraders,
+      allTraders: state.allProfiles,
       actualTrades: state.allTrades,
       user: state.auth.data,
     };
-  } else return { allTraders: state.allTraders, actualTrades: state.allTrades };
+  } else return { allTraders: state.allProfiles, actualTrades: state.allTrades };
 };
 
 export default connect(mapStateToProps, {

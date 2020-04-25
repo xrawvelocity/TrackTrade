@@ -1,50 +1,24 @@
 import { combineReducers } from "redux";
-
-// loggedin user's trades
 import trades from "./trades";
-
-// loggedin user's trade ideas
+import tradeImage from "./tradeImage";
 import ideas from "./ideas";
-
-// other users data
-import otherProfileReducer from "./profile/otherProfileReducer";
-import allTradesReducer from "./home/allTradesReducer";
-import allTradeIdeasReducer from "./home/allTradeIdeasReducer";
-import allTradersReducer from "./home/allTradersReducer";
-
-// connect with other users
-import addConnectionReducer from "./profile/addConnectionReducer";
-import removeConnectionReducer from "./profile/removeConnectionReducer";
-
-// messages
-import allMessagesReducer from "./profile/allMessagesReducer";
-import sendMessageReducer from "./profile/sendMessageReducer";
-
-// auth
+import ideaImage from "./ideaImage";
+import allProfiles from "./allProfiles";
+import otherProfile from "./otherProfile";
+import connections from "./connections";
+import messages from "./messages";
 import auth from "./auth";
-
-// avatar
-import updateAvatarReducer from "./profile/updateAvatarReducer";
+import updateAvatar from "./updateAvatar";
 
 export default combineReducers({
   trades,
-
+  tradeImage,
   ideas,
-
+  ideaImage,
   auth,
-
-  // other users data
-  otherProfile: otherProfileReducer,
-  allTraders: allTradersReducer,
-
-  // connect with other users
-  addConnection: addConnectionReducer,
-  removeConnection: removeConnectionReducer,
-
-  // messages
-  allMessages: allMessagesReducer,
-  sendMessage: sendMessageReducer,
-
-  // avatar
-  updateAvatar: updateAvatarReducer,
+  allProfiles,
+  otherProfile,
+  connections,
+  messages,
+  updateAvatar,
 });

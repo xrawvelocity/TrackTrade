@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import Header from "../partials/Header";
 
 import { Form, Field } from "react-final-form";
@@ -7,17 +7,6 @@ import { Form, Field } from "react-final-form";
 import { connect } from "react-redux";
 import { postTrade, tradeImageUpload } from "../../actions";
 
-function useDidUpdate(callback, deps) {
-  const hasMount = useRef(false);
-
-  useEffect(() => {
-    if (hasMount.current) {
-      callback();
-    } else {
-      hasMount.current = true;
-    }
-  }, deps);
-}
 
 const PostTrade = (props) => {
   const handleTheSubmit = async (values) => {
@@ -146,7 +135,7 @@ const PostTrade = (props) => {
                       className="trade-idea-container-form-input"
                       component="input"
                     />
-                    <p>{errors.lot}</p>
+                    <p className="trade-idea-container-form-input__error">{errors.lot}</p>
                   </div>
                 </div>
                 <div className="trade-idea-right">
