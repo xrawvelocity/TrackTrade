@@ -1,6 +1,6 @@
 import {
   CHECK_LOGIN,
-  LOG_IN,
+  LOG_IN_REQUEST,
   LOG_OUT,
   SIGN_UP,
 } from "../constants/ActionTypes";
@@ -10,7 +10,7 @@ export default (user = null, action) => {
     case CHECK_LOGIN:
       return (user = action.payload);
 
-    case LOG_IN:
+    case LOG_IN_REQUEST:
       return (user = action.payload);
 
     case LOG_OUT:

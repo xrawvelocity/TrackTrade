@@ -3,14 +3,6 @@ import * as types from "../constants/ActionTypes";
 
 // getTrades
 
-export const fetchAllTrades = () => async (dispatch) => {
-  const response = await services.getAllTrades();
-  dispatch({
-    type: types.FETCH_ALLTRADES,
-    payload: response,
-  });
-};
-
 export const fetchTrades = () => async (dispatch) => {
   const response = await services.getTrades();
   dispatch({

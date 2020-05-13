@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 // redux imports
 import { connect } from "react-redux";
-import { fetchAllTrades, fetchAllTraders } from "../../actions";
+import { fetchAllTraders } from "../../actions";
+import { getAllTrades } from "../../sagas/trades";
 import { checkLogin } from "../../actions/auth";
 
 const Connections = (props) => {
@@ -18,7 +19,7 @@ const Connections = (props) => {
   const fetchData = async () => {
     await props.fetchAllTraders();
 
-    await props.fetchAllTrades();
+    await getAllTrades();
 
     await props.checkLogin();
   };
@@ -158,7 +159,6 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  fetchAllTrades,
   fetchAllTraders,
   checkLogin,
 })(Connections);

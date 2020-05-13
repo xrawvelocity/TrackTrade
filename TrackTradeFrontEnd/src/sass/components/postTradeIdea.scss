@@ -66,6 +66,12 @@
                 }
             }
 
+            &__error {
+                color: #d21212;
+                font-size: 2rem;
+                margin-top: .5rem;
+            }
+
         }
 
         &-description {

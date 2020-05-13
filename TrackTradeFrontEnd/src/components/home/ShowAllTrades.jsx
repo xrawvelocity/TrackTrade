@@ -14,13 +14,15 @@ import {
 
 // redux imports
 import { connect } from "react-redux";
-import { fetchAllTrades } from "../../actions";
+import { getAllTrades } from "../../sagas/trades";
 
 class ShowAllTrades extends Component {
   state = {};
 
   async componentDidMount() {
-    await this.props.fetchAllTrades();
+    let gen = getAllTrades();
+    await gen.next();
+    await gen.next();
     this.setState({ trades: this.props.allTrades.data });
   }
 
@@ -310,7 +312,8 @@ class ShowAllTrades extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log("state in allTrades", state);
   return { allTrades: state.trades.trades };
 };
 
-export default connect(mapStateToProps, { fetchAllTrades })(ShowAllTrades);
+export default connect(mapStateToProps, { getAllTrades })(ShowAllTrades);

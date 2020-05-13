@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 //redux imports
 import { connect } from "react-redux";
-import { fetchTrades, fetchAllTrades } from "../../actions";
+import { fetchTrades } from "../../actions";
+import { getAllTrades } from "../../sagas/trades";
 
 import CanvasJSReact from "../../canvasjs.react";
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -121,7 +122,7 @@ class ShowStats extends Component {
 
       chart.render();
     } else {
-      await this.props.fetchAllTrades();
+      await getAllTrades();
 
       let trades = this.props.allTrades;
       let wins = 0;
@@ -565,6 +566,6 @@ const mapStateToProps = (state) => {
   return { actualTrades: state.trades.moretrades, allTrades: state.allTrades };
 };
 
-export default connect(mapStateToProps, { fetchTrades, fetchAllTrades })(
+export default connect(mapStateToProps, { fetchTrades })(
   ShowStats
 );

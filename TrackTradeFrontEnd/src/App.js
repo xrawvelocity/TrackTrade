@@ -22,7 +22,7 @@ class App extends Component {
 
   async componentDidMount() {
     await this.props.checkLogin();
-    console.log(this.props)
+    console.log(this.props);
   }
 
   render() {
@@ -151,9 +151,8 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  if(state.auth){
+  if (state.auth) {
     return { user: state.auth.data };
-  }
-  else return {}
+  } else return {};
 };
 export default connect(mapStateToProps, { checkLogin })(App);

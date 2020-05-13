@@ -1027,6 +1027,10 @@ body::-webkit-scrollbar-thumb {
             .trade-idea-container-form-input-file-label:hover {
               background-color: #053042;
               cursor: pointer; }
+        .trade-idea-container-form-input__error {
+          color: #d21212;
+          font-size: 2rem;
+          margin-top: .5rem; }
       .trade-idea-container-form-description {
         width: 400px;
         font-size: 3rem;

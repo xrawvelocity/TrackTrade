@@ -1,237 +1,227 @@
 .trade {
+  &-ideas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 35rem);
+    margin: auto;
+    justify-content: center;
+    gap: 5rem 5rem;
 
-    &-ideas {
-
-        display: grid;
-        grid-template-columns: repeat(auto-fit, 35rem);
-        margin: auto;
-        justify-content: center;
-        gap: 5rem 5rem;
-
-        &-card {
-
-            &-link {
-                &,
-                &:link,
-                &:visited {
-                    padding: 3rem 1rem;
-                    text-decoration: none;
-                color: #ddd;
-                }
-            }
-    
-            background-color: rgba(153, 153, 153, 0.2);
-            border: 1px solid rgba(153, 153, 153, 0.3);
-            
-            box-shadow: 0 .75rem 2rem rgba(13, 13, 13, 1);
-            border-radius: 2px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 375px;
-            
-            // align-items: start;
-            
-            word-wrap: break-word;
-            position: relative;
-            transition: all .3s ease-in-out;
-
-            @include respond(tab-port){
-                height: 270px;
-            }
-
-            &:hover {
-                cursor: pointer;
-                transform: translateY(-.5rem);
-                box-shadow: 0 1.25rem 3rem rgba(13, 13, 13, 1);
-
-                & .trade-ideas-card-more {
-                    // display: block;
-                    opacity: 1;
-                }
-
-                & .trade-ideas-card-win {
-                    &,
-                    &-all{
-                        color: rgba(13, 93, 13, .8);
-                    }
-                }
-                & .trade-ideas-card-loss {
-                    &,
-                    &-all{
-                        color: rgba(93, 13, 13, .8);
-                    }
-                }
-            }
-
-            &-more {
-
-                &,
-                &:link,
-                &:visited {
-                    display: block;
-                    opacity: 0;
-                    position: absolute;
-                    height: 101%;
-                    width: 101%;
-                    padding-top: 50%;
-                    margin-left: -.75px;
-                    text-align: center;
-                    font-size: 2rem;
-                    transition: all .2s ease-in-out;
-                    color: #fff;
-                    text-decoration: none;
-                    background-color: rgba(13, 13, 13, .85);
-                }
-            }
-
-            &-win-all {
-                display: block;
-                position: absolute;
-                top: 73.5px;
-                right: 20px;
-                font-size: 2rem;
-                font-weight: 700;
-                transition: all .2s ease-in-out;
-                color: #2c1;
-            }
-
-            &-loss-all {
-                display: block;
-                position: absolute;
-                top: 73.5px;
-                right: 20px;
-                font-size: 2rem;
-                font-weight: 700;
-                transition: all .2s ease-in-out;
-                color: #d21;
-            }
-
-            &-win-popup {
-                display: block;
-                
-                font-size: 2rem;
-                font-weight: 700;
-                transition: all .2s ease-in-out;
-                color: #2c1;
-            }
-
-            &-loss-popup {
-                display: block;
-                
-                font-size: 2rem;
-                font-weight: 700;
-                transition: all .2s ease-in-out;
-                color: #d21;
-            }
-
-
-            &-win {
-                display: block;
-                position: absolute;
-                top: 49.5px;
-                right: 20px;
-                font-size: 2rem;
-                font-weight: 700;
-                transition: all .2s ease-in-out;
-                color: #2c1;
-            }
-
-            &-loss {
-                display: block;
-                position: absolute;
-                top: 49.5px;
-                right: 20px;
-                font-size: 2rem;
-                font-weight: 700;
-                transition: all .2s ease-in-out;
-                color: #f20;
-            }
-
-            &-delete {
-                display: block;
-                position: absolute;
-                top: 10px;
-                right: 15px;
-                font-size: 2rem;
-                transition: all .2s ease-in-out;
-
-                &:hover {
-                    cursor: pointer;
-                    color: #d21;
-                }
-            }
-
-            &__item {
-
-                padding: 1rem;
-                font-size: 2rem;
-                display: flex;
-                justify-content: space-between;
-                
-
-                &-title {
-                    text-transform: uppercase;
-                    font-weight: 700;
-
-                    &-home {
-                        display: flex;
-                        align-items: center;
-
-                        &-text {
-                            padding-left: 2rem;
-                            font-weight: 700;
-                            word-break: break-all;
-                        }
-                    }
-                }
-
-                &__image {
-                    object-fit: cover;
-                    height: 100px;
-                    width: 100px;
-                    z-index: -20;
-                    border-radius: 50%;
-                    border: none;
-
-                    @include respond(smallphone){
-                        height: 50px;
-                        width: 50px;
-                    }
-
-                    &-default {
-                        background-image: url("./images/userdefault.png");
-                        background-size: cover;
-                        border-radius: 50%;
-                        border: none;
-                        height: 100px;
-                        width: 100px;
-                        z-index: -20;
-
-                        @include respond(smallphone){
-                            height: 50px;
-                            width: 50px;
-                        }
-                    }
-                }
-
-                &-content {
-                    font-size: 1.8rem;
-                }
-
-                &-date {
-                    
-                    padding-top: 2rem;
-                    font-size: 1.6rem;
-                    &-title {
-
-                    }
-
-                    &-content {
-
-                    }
-                }
-            }
+    &-card {
+      &-link {
+        &,
+        &:link,
+        &:visited {
+          padding: 3rem 1rem;
+          text-decoration: none;
+          color: #ddd;
         }
+      }
+
+      background-color: rgba(153, 153, 153, 0.2);
+      border: 1px solid rgba(153, 153, 153, 0.3);
+
+      box-shadow: 0 0.75rem 2rem rgba(13, 13, 13, 1);
+      border-radius: 2px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 375px;
+
+      // align-items: start;
+
+      word-wrap: break-word;
+      position: relative;
+      transition: all 0.3s ease-in-out;
+
+      @include respond(tab-port) {
+        height: 270px;
+      }
+
+      &:hover {
+        cursor: pointer;
+        transform: translateY(-0.5rem);
+        box-shadow: 0 1.25rem 3rem rgba(13, 13, 13, 1);
+
+        & .trade-ideas-card-more {
+          // display: block;
+          opacity: 1;
+        }
+
+        & .trade-ideas-card-win {
+          &,
+          &-all {
+            color: rgba(13, 93, 13, 0.8);
+          }
+        }
+        & .trade-ideas-card-loss {
+          &,
+          &-all {
+            color: rgba(93, 13, 13, 0.8);
+          }
+        }
+      }
+
+      &-more {
+        &,
+        &:link,
+        &:visited {
+          display: block;
+          opacity: 0;
+          position: absolute;
+          height: 101%;
+          width: 101%;
+          padding-top: 50%;
+          margin-left: -0.75px;
+          text-align: center;
+          font-size: 2rem;
+          transition: all 0.2s ease-in-out;
+          color: #fff;
+          text-decoration: none;
+          background-color: rgba(13, 13, 13, 0.85);
+        }
+      }
+
+      &-win-all {
+        display: block;
+        position: absolute;
+        top: 73.5px;
+        right: 20px;
+        font-size: 2rem;
+        font-weight: 700;
+        transition: all 0.2s ease-in-out;
+        color: #2c1;
+      }
+
+      &-loss-all {
+        display: block;
+        position: absolute;
+        top: 73.5px;
+        right: 20px;
+        font-size: 2rem;
+        font-weight: 700;
+        transition: all 0.2s ease-in-out;
+        color: #d21;
+      }
+
+      &-win-popup {
+        display: block;
+
+        font-size: 2rem;
+        font-weight: 700;
+        transition: all 0.2s ease-in-out;
+        color: #2c1;
+      }
+
+      &-loss-popup {
+        display: block;
+
+        font-size: 2rem;
+        font-weight: 700;
+        transition: all 0.2s ease-in-out;
+        color: #d21;
+      }
+
+      &-win {
+        display: block;
+        position: absolute;
+        top: 49.5px;
+        right: 20px;
+        font-size: 2rem;
+        font-weight: 700;
+        transition: all 0.2s ease-in-out;
+        color: #2c1;
+      }
+
+      &-loss {
+        display: block;
+        position: absolute;
+        top: 49.5px;
+        right: 20px;
+        font-size: 2rem;
+        font-weight: 700;
+        transition: all 0.2s ease-in-out;
+        color: #f20;
+      }
+
+      &-delete {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 2rem;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          cursor: pointer;
+          color: #d21;
+        }
+      }
+
+      &__item {
+        padding: 1rem;
+        font-size: 2rem;
+        display: flex;
+        justify-content: space-between;
+
+        &-title {
+          text-transform: uppercase;
+          font-weight: 700;
+
+          &-home {
+            display: flex;
+            align-items: center;
+
+            &-text {
+              padding-left: 2rem;
+              font-weight: 700;
+              word-break: break-all;
+            }
+          }
+        }
+
+        &__image {
+          object-fit: cover;
+          height: 100px;
+          width: 100px;
+          z-index: -20;
+          border-radius: 50%;
+          border: none;
+
+          @include respond(smallphone) {
+            height: 50px;
+            width: 50px;
+          }
+
+          &-default {
+            background-image: url("./images/userdefault.png");
+            background-size: cover;
+            border-radius: 50%;
+            border: none;
+            height: 100px;
+            width: 100px;
+            z-index: -20;
+
+            @include respond(smallphone) {
+              height: 50px;
+              width: 50px;
+            }
+          }
+        }
+
+        &-content {
+          font-size: 1.8rem;
+        }
+
+        &-date {
+          padding-top: 2rem;
+          font-size: 1.6rem;
+          &-title {
+          }
+
+          &-content {
+          }
+        }
+      }
     }
+  }
 }

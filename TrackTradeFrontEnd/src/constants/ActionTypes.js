@@ -1,5 +1,7 @@
 // index actions
-export const FETCH_ALLTRADES = "FETCH_ALLTRADES";
+export const FETCH_ALLTRADES_PENDING = "FETCH_ALLTRADES_PENDING";
+export const FETCH_ALLTRADES_SUCCESS = "FETCH_ALLTRADES_SUCCESS";
+export const FETCH_ALLTRADES_ERROR = "FETCH_ALLTRADES_ERROR";
 export const FETCH_TRADES = "FETCH_TRADES";
 export const FETCH_ALLTRADEIDEAS = "FETCH_ALLTRADEIDEAS";
 export const FETCH_TRADEIDEAS = "FETCH_TRADEIDEAS";
@@ -14,7 +16,9 @@ export const AVATAR_UPLOAD = "AVATAR_UPLOAD";
 
 // auth actions
 export const CHECK_LOGIN = "CHECK_LOGIN";
-export const LOG_IN = "LOG_IN";
+export const LOG_IN_REQUEST = "LOG_IN_REQUEST";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_ERROR = "LOGIN_ERROR";
 export const SIGN_UP = "SIGN_UP";
 export const LOG_OUT = "LOG_OUT";
 

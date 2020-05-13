@@ -54,7 +54,7 @@ const services = {
   getTrades: async () => {
     return await service.get("/get-trades");
   },
-  getAllTrades: async () => {
+  fetchAllTrades: async () => {
     return await service.get("/get-all-trades");
   },
 

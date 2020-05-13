@@ -14,7 +14,7 @@ export const checkLogin = () => async (dispatch) => {
 export const logIn = (data) => async (dispatch) => {
   const response = await services.logIn(data);
   dispatch({
-    type: types.LOG_IN,
+    type: types.LOG_IN_REQUEST,
     payload: response,
   });
 };

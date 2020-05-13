@@ -7,7 +7,6 @@ import { Form, Field } from "react-final-form";
 import { connect } from "react-redux";
 import { postTrade, tradeImageUpload } from "../../actions";
 
-
 const PostTrade = (props) => {
   const handleTheSubmit = async (values) => {
     let pips = 0;
@@ -45,6 +44,7 @@ const PostTrade = (props) => {
 
     try {
       await props.tradeImageUpload(uploadData);
+      console.log("props", props);
     } catch (err) {
       console.log("*****", err.message);
     }
@@ -56,12 +56,24 @@ const PostTrade = (props) => {
       <div className="trade-idea-container">
         <Form
           validate={(values) => {
+            console.log(values);
             const errors = {};
-            if (values.lot < 0) {
-              errors.lot = "This cant be less than zero";
-            } else if (!values.lot) {
-              errors.lot = "This fields is required";
+            if (!values.currency) {
+              errors.currency = "*";
             }
+            if (!values.kind) {
+              errors.kind = "*";
+            }
+            if (!values.lot) {
+              errors.lot = "*";
+            }
+            if (!values.entry) {
+              errors.entry = "*";
+            }
+            if (!values.close) {
+              errors.close = "*";
+            }
+            console.log(errors);
             return errors;
           }}
           onSubmit={handleTheSubmit}
@@ -72,111 +84,164 @@ const PostTrade = (props) => {
             pristine,
             values,
             valid,
-            errors
+            errors,
           }) => (
             <form className="trade-idea-container-form" onSubmit={handleSubmit}>
               <div className="trade-idea-top">
                 <div className="trade-idea-left">
-                  <div className="trade-idea-container-form-group">
-                    <label htmlFor="currency">Currency</label>
-                    <Field
-                      className="trade-idea-container-form-input"
-                      required
-                      name="currency"
-                      component="select"
-                    >
-                      <option></option>
-                      <option>AUD/CAD</option>
-                      <option>AUD/CHF</option>
-                      <option>AUD/JPY</option>
-                      <option>AUD/NZD</option>
-                      <option>AUD/USD</option>
-                      <option>CAD/CHF</option>
-                      <option>CAD/JPY</option>
-                      <option>CHF/JPY</option>
-                      <option>EUR/AUD</option>
-                      <option>EUR/CAD</option>
-                      <option>EUR/CHF</option>
-                      <option>EUR/GBP</option>
-                      <option>EUR/JPY</option>
-                      <option>EUR/NZD</option>
-                      <option>EUR/USD</option>
-                      <option>GBP/AUD</option>
-                      <option>GBP/CAD</option>
-                      <option>GBP/CHF</option>
-                      <option>GBP/JPY</option>
-                      <option>GBP/NZD</option>
-                      <option>GBP/USD</option>
-                      <option>NZD/CAD</option>
-                      <option>NZD/CHF</option>
-                      <option>NZD/JPY</option>
-                      <option>NZD/USD</option>
-                      <option>USD/CAD</option>
-                      <option>USD/JPY</option>
-                    </Field>
-                  </div>
-                  <div className="trade-idea-container-form-group">
-                    <label htmlFor="kind">Sell or Buy</label>
-                    <Field
-                      name="kind"
-                      className="trade-idea-container-form-input"
-                      component="select"
-                    >
-                      <option value=""></option>
-                      <option value="sell">Sell</option>
-                      <option value="buy">Buy</option>
-                    </Field>
-                  </div>
-                  <div className="trade-idea-container-form-group">
-                    <label htmlFor="lot">Lot size</label>
-                    <Field
-                      name="lot"
-                      type="number"
-                      className="trade-idea-container-form-input"
-                      component="input"
-                    />
-                    <p className="trade-idea-container-form-input__error">{errors.lot}</p>
-                  </div>
+                  <Field name="currency">
+                    {({ input, meta }) => {
+                      return (
+                        <div className="trade-idea-container-form-group">
+                          <div style={{ display: "flex" }}>
+                            <label htmlFor="currency">Currency</label>
+                            {errors.currency && (
+                              <p className="trade-idea-container-form-input__error">
+                                {errors.currency}
+                              </p>
+                            )}
+                          </div>
+                          <select
+                            {...input}
+                            className="trade-idea-container-form-input"
+                            required
+                          >
+                            <option></option>
+                            <option>AUD/CAD</option>
+                            <option>AUD/CHF</option>
+                            <option>AUD/JPY</option>
+                            <option>AUD/NZD</option>
+                            <option>AUD/USD</option>
+                            <option>CAD/CHF</option>
+                            <option>CAD/JPY</option>
+                            <option>CHF/JPY</option>
+                            <option>EUR/AUD</option>
+                            <option>EUR/CAD</option>
+                            <option>EUR/CHF</option>
+                            <option>EUR/GBP</option>
+                            <option>EUR/JPY</option>
+                            <option>EUR/NZD</option>
+                            <option>EUR/USD</option>
+                            <option>GBP/AUD</option>
+                            <option>GBP/CAD</option>
+                            <option>GBP/CHF</option>
+                            <option>GBP/JPY</option>
+                            <option>GBP/NZD</option>
+                            <option>GBP/USD</option>
+                            <option>NZD/CAD</option>
+                            <option>NZD/CHF</option>
+                            <option>NZD/JPY</option>
+                            <option>NZD/USD</option>
+                            <option>USD/CAD</option>
+                            <option>USD/JPY</option>
+                          </select>
+                        </div>
+                      );
+                    }}
+                  </Field>
+                  <Field name="kind">
+                    {({ input, meta }) => {
+                      return (
+                        <div className="trade-idea-container-form-group">
+                          <div style={{ display: "flex" }}>
+                            <label htmlFor="kind">Sell or Buy</label>
+                            {errors.kind && (
+                              <p className="trade-idea-container-form-input__error">
+                                {errors.kind}
+                              </p>
+                            )}
+                          </div>
+                          <select
+                            {...input}
+                            className="trade-idea-container-form-input"
+                            required
+                          >
+                            <option value=""></option>
+                            <option value="sell">Sell</option>
+                            <option value="buy">Buy</option>
+                          </select>
+                        </div>
+                      );
+                    }}
+                  </Field>
+
+                  <Field name="lot">
+                    {({ input, meta }) => {
+                      return (
+                        <div className="trade-idea-container-form-group">
+                          <div style={{ display: "flex" }}>
+                            <label htmlFor="lot">Lot size</label>
+                            {errors.lot && (
+                              <p className="trade-idea-container-form-input__error">
+                                {errors.lot}
+                              </p>
+                            )}
+                          </div>
+                          <input
+                            {...input}
+                            type="number"
+                            className="trade-idea-container-form-input"
+                            step="0.001"
+                            min="0.001"
+                            max="100"
+                            required
+                          />
+                        </div>
+                      );
+                    }}
+                  </Field>
                 </div>
                 <div className="trade-idea-right">
-                  <div className="trade-idea-container-form-group">
-                    <label htmlFor="entry">Entry price</label>
-                    <Field
-                      name="entry"
-                      type="number"
-                      className="trade-idea-container-form-input"
-                      component="input"
-                    />
-                    {/* <input
-                        onChange={handleChange}
-                        type="number"
-                        className="trade-idea-container-form-input"
-                        name="entry"
-                        step="0.0001"
-                        min="0"
-                        max="1000"
-                        required
-                      /> */}
-                  </div>
-                  <div className="trade-idea-container-form-group">
-                    <label htmlFor="close">Close price</label>
-                    <Field
-                      name="close"
-                      type="number"
-                      className="trade-idea-container-form-input"
-                      component="input"
-                    />
-                    {/* <input
-                        onChange={handleChange}
-                        type="number"
-                        className="trade-idea-container-form-input"
-                        name="close"
-                        step="0.0001"
-                        min="0"
-                        max="1000"
-                        required
-                      /> */}
-                  </div>
+                  <Field name="entry">
+                    {({ input, meta }) => {
+                      return (
+                        <div className="trade-idea-container-form-group">
+                          <div style={{ display: "flex" }}>
+                            <label htmlFor="entry">Entry price</label>
+                            {errors.entry && (
+                              <p className="trade-idea-container-form-input__error">
+                                {errors.entry}
+                              </p>
+                            )}
+                          </div>
+                          <input
+                            {...input}
+                            type="number"
+                            className="trade-idea-container-form-input"
+                            step="0.0001"
+                            min="0"
+                            max="1000"
+                            required
+                          />
+                        </div>
+                      );
+                    }}
+                  </Field>
+                  <Field name="close">
+                    {({ input, meta }) => {
+                      return (
+                        <div className="trade-idea-container-form-group">
+                          <div style={{ display: "flex" }}>
+                            <label htmlFor="close">Close price</label>
+                            {errors.close && (
+                              <p className="trade-idea-container-form-input__error">
+                                {errors.close}
+                              </p>
+                            )}
+                          </div>
+                          <input
+                            {...input}
+                            type="number"
+                            className="trade-idea-container-form-input"
+                            step="0.0001"
+                            min="0"
+                            max="1000"
+                            required
+                          />
+                        </div>
+                      );
+                    }}
+                  </Field>
                   <div className="trade-idea-container-form-group">
                     <label htmlFor="risk">Risk %</label>
                     <Field
@@ -185,35 +250,30 @@ const PostTrade = (props) => {
                       className="trade-idea-container-form-input"
                       component="input"
                     />
-                    {/* <input
-                        onChange={handleChange}
-                        type="number"
-                        className="trade-idea-container-form-input"
-                        name="risk"
-                        step="0.01"
-                        min="0"
-                        max="100"
-                        required
-                      /> */}
                   </div>
                 </div>
               </div>
+              <Field name="description">
+                {({ input, meta }) => {
+                  return (
+                    <div className="trade-idea-container-form-group">
+                      <label htmlFor="description">Description</label>
+                      <textarea
+                        {...input}
+                        type="text"
+                        className="trade-idea-container-form-description"
+                      />
+                    </div>
+                  );
+                }}
+              </Field>
               <div className="trade-idea-container-form-group">
-                <label htmlFor="description">Description</label>
-                <Field
-                  name="description"
-                  className="trade-idea-container-form-description"
-                  component="textarea"
-                />
-                {/* <textarea
-                    onChange={handleChange}
-                    type="text"
-                    className="trade-idea-container-form-description"
-                    name="description"
-                  /> */}
-              </div>
-              <div className="trade-idea-container-form-group">
-                <label htmlFor="screenshot">Screenshot</label>
+                <div style={{ display: "flex" }}>
+                  <label htmlFor="screenshot">Screenshot</label>
+                  {!props.imageUrl && (
+                    <p className="trade-idea-container-form-input__error">*</p>
+                  )}
+                </div>
                 <input
                   onChange={(e) => handleFileUpload(e)}
                   type="file"
@@ -255,7 +315,7 @@ const PostTrade = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return { postTrade: state.postTrade, imageUrl: state.tradeImageUpload };
+  return { postTrade: state.postTrade, imageUrl: state.tradeImage };
 };
 
 export default connect(mapStateToProps, { postTrade, tradeImageUpload })(

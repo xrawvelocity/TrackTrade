@@ -12,7 +12,6 @@ class Header extends Component {
     await this.props.logOut();
     await this.props.checkLogin();
     this.props.history.push("/");
-    // window.location.reload();
   };
 
   render() {

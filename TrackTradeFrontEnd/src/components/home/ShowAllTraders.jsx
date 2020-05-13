@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 
 //redux imports
 import { connect } from "react-redux";
-import { fetchAllTrades, fetchAllTraders } from "../../actions";
+import { fetchAllTraders } from "../../actions";
+import { getAllTrades } from "../../sagas/trades";
 
 class ShowAllTraders extends Component {
   state = {};
 
   async componentDidMount() {
     await this.props.fetchAllTraders();
-    await this.props.fetchAllTrades();
+    await getAllTrades();
 
     this.setState({ traders: this.props.allTraders.data });
     this.setState({ actualTrades: this.props.actualTrades.data });
@@ -238,6 +239,6 @@ const mapStateToProps = (state) => {
   return { allTraders: state.allProfiles, actualTrades: state.trades };
 };
 
-export default connect(mapStateToProps, { fetchAllTrades, fetchAllTraders })(
+export default connect(mapStateToProps, { fetchAllTraders })(
   ShowAllTraders
 );
